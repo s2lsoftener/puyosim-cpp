@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		31DAE22223C68D0300489B3C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31DAE22123C68D0300489B3C /* main.cpp */; };
+		31DAE22A23C68EBB00489B3C /* matrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31DAE22823C68EBB00489B3C /* matrix.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +26,8 @@
 /* Begin PBXFileReference section */
 		31DAE21E23C68D0300489B3C /* puyosim-cpp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "puyosim-cpp"; sourceTree = BUILT_PRODUCTS_DIR; };
 		31DAE22123C68D0300489B3C /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		31DAE22823C68EBB00489B3C /* matrix.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = matrix.cpp; sourceTree = "<group>"; };
+		31DAE22923C68EBB00489B3C /* matrix.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = matrix.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +61,8 @@
 			isa = PBXGroup;
 			children = (
 				31DAE22123C68D0300489B3C /* main.cpp */,
+				31DAE22823C68EBB00489B3C /* matrix.cpp */,
+				31DAE22923C68EBB00489B3C /* matrix.hpp */,
 			);
 			path = "puyosim-cpp";
 			sourceTree = "<group>";
@@ -118,6 +123,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				31DAE22A23C68EBB00489B3C /* matrix.cpp in Sources */,
 				31DAE22223C68D0300489B3C /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
