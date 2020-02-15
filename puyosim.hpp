@@ -32,9 +32,9 @@ public:
 using PuyoGroup = std::vector<Puyo>;
 using PuyoGroups = std::vector<std::vector<Puyo>>;
 
-inline constexpr int DEFAULT_COLS { 6 };
-inline constexpr int DEFAULT_ROWS { 13 };
-inline constexpr int DEFAULT_HROWS { 1 }; // Hidden rows
+constexpr int DEFAULT_COLS{ 6 };
+constexpr int DEFAULT_ROWS{ 13 };
+constexpr int DEFAULT_HROWS{ 1 }; // Hidden rows
 
 class Matrix {
 public:
@@ -42,6 +42,8 @@ public:
     int m_rows;
     int m_cols;
     int m_hrows;
+    PuyoGroups m_nextColorPops;
+    PuyoGroup m_nextGarbagePops;
 
     Matrix(
         int rows = DEFAULT_ROWS,
@@ -54,7 +56,7 @@ public:
     void setTestChain();
 
     PuyoGroups nextColorPops();
-    // PuyoGroup nextGarbagePops(PuyoGroups& coloredPuyo);
+    PuyoGroup nextGarbagePops(PuyoGroups nextColors);
 
     void print();
 };
@@ -65,7 +67,7 @@ public:
     std::vector<bool> m_data;
     int m_rows;
     int m_cols;
-    
+
     BoolMatrix(int rows = DEFAULT_ROWS, int cols = DEFAULT_COLS);
 
     bool get(int x, int y);

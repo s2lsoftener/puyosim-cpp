@@ -3,14 +3,16 @@
 
 int main() {
     PuyoSim::Matrix mat;
-    mat.setTestChain();
-    mat.print();
-    // std::cout << "Checking pops..." << '\n';
-    // PuyoSim::PuyoGroups nextColorPops = mat.nextColorPops();
-    // std::cout << "Garbage To Pop: " << '\n';
-    // PuyoSim::PuyoGroup nextGarbage = mat.nextGarbagePops(nextColorPops);
-    // for (PuyoSim::Puyo garbage : nextGarbage) {
-    //     std::cout << garbage.p << " ~ x:" << garbage.x << " y:" << garbage.y << '\n';
-    // }
-    return 0;
+	mat.setTestChain();
+	mat.print();
+
+	PuyoSim::PuyoGroups nextColors = mat.nextColorPops();
+	PuyoSim::PuyoGroup nextGarbages = mat.nextGarbagePops(nextColors);
+
+    std::cout << "ok\n";
+	for (auto garbage : nextGarbages) {
+		std::cout << garbage.p;
+	}
+
+	return 0;
 }
