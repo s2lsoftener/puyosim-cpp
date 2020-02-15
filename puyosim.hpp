@@ -18,8 +18,6 @@ public:
     int m_rows;
     int m_cols;
     int m_hrows;
-    PuyoPtrGroups m_nextColorPops;
-    PuyoPtrGroup m_nextGarbagePops;
 
     Matrix(
         int rows = DEFAULT_ROWS,
@@ -31,12 +29,13 @@ public:
     void setPuyo(char color, int x, int y);
     void setTestChain(int i);
 
-    PuyoPtrGroups nextColorPops();
-    PuyoPtrGroup nextGarbagePops(PuyoPtrGroups nextColors);
-
     void print();
 };
 
+PuyoPtrGroups nextColorPops(Matrix& mat);
+PuyoPtrGroup nextGarbagePops(Matrix& mat, PuyoPtrGroups& nextColors);
+void popColoredPuyos(PuyoPtrGroups& nextColors);
+void popGarbagePuyos(PuyoPtrGroup& nextGarbage);
 
 class BoolMatrix {
 public:

@@ -3,7 +3,7 @@
 
 namespace PuyoSim {
 
-char tests[2][13][6] = {
+constexpr char tests[2][13][6] = {
     { // Normal chain
         { '0', '0', '0', '0', '0', '0' },
         { '0', '0', '0', '0', '0', '0' },

@@ -44,13 +44,13 @@ void Matrix::setTestChain(int i) {
     }
 }
 
-PuyoPtrGroups Matrix::nextColorPops() {    
+PuyoPtrGroups nextColorPops(Matrix& mat) {    
     BoolMatrix checked;
     PuyoPtrGroups groups;
 
-    for (int y = 0; y < m_rows; y++) {
-        for (int x = 0; x < m_cols; x++) {
-            Puyo& currentPuyo = *puyoAt(x, y);
+    for (int y = 0; y < mat.m_rows; y++) {
+        for (int x = 0; x < mat.m_cols; x++) {
+            Puyo& currentPuyo = *mat.puyoAt(x, y);
 
             // If the cell has already been checked, skip
             if (checked.get(x, y)) continue;
@@ -60,29 +60,29 @@ PuyoPtrGroups Matrix::nextColorPops() {
             if (currentPuyo.p == COLOR["NONE"] || currentPuyo.p == COLOR["GARBAGE"]) continue;
 
             std::vector<Puyo*> group;
-            group.push_back(puyoAt(x, y));
+            group.push_back(mat.puyoAt(x, y));
             int i = 0;
 
             while (i < static_cast<int>(group.size())) {
                 // Check up
-                if ((*group[i]).y > m_hrows && !checked.get((*group[i]).x, (*group[i]).y - 1) && (*group[i]).isEqual(*puyoAt((*group[i]).x, (*group[i]).y - 1))) {
+                if ((*group[i]).y > mat.m_hrows && !checked.get((*group[i]).x, (*group[i]).y - 1) && (*group[i]).isEqual(*mat.puyoAt((*group[i]).x, (*group[i]).y - 1))) {
                     checked.set(true, (*group[i]).x, (*group[i]).y - 1);
-                    group.push_back(puyoAt((*group[i]).x, (*group[i]).y - 1));
+                    group.push_back(mat.puyoAt((*group[i]).x, (*group[i]).y - 1));
                 }
                 // Check down
-                if ((*group[i]).y < m_rows - 1 && !checked.get((*group[i]).x, (*group[i]).y + 1) && (*group[i]).isEqual(*puyoAt((*group[i]).x, (*group[i]).y + 1))) {
+                if ((*group[i]).y < mat.m_rows - 1 && !checked.get((*group[i]).x, (*group[i]).y + 1) && (*group[i]).isEqual(*mat.puyoAt((*group[i]).x, (*group[i]).y + 1))) {
                     checked.set(true, (*group[i]).x, (*group[i]).y + 1);
-                    group.push_back(puyoAt((*group[i]).x, (*group[i]).y + 1));
+                    group.push_back(mat.puyoAt((*group[i]).x, (*group[i]).y + 1));
                 }
                 // Check left
-                if ((*group[i]).x > 0 && !checked.get((*group[i]).x - 1, (*group[i]).y) && (*group[i]).isEqual(*puyoAt((*group[i]).x - 1, (*group[i]).y))) {
+                if ((*group[i]).x > 0 && !checked.get((*group[i]).x - 1, (*group[i]).y) && (*group[i]).isEqual(*mat.puyoAt((*group[i]).x - 1, (*group[i]).y))) {
                     checked.set(true, (*group[i]).x - 1, (*group[i]).y);
-                    group.push_back(puyoAt((*group[i]).x - 1, (*group[i]).y));
+                    group.push_back(mat.puyoAt((*group[i]).x - 1, (*group[i]).y));
                 }
                 // Check right
-                if ((*group[i]).x < m_cols - 1 && !checked.get((*group[i]).x + 1, (*group[i]).y) && (*group[i]).isEqual(*puyoAt((*group[i]).x + 1, (*group[i]).y))) {
+                if ((*group[i]).x < mat.m_cols - 1 && !checked.get((*group[i]).x + 1, (*group[i]).y) && (*group[i]).isEqual(*mat.puyoAt((*group[i]).x + 1, (*group[i]).y))) {
                     checked.set(true, (*group[i]).x + 1, (*group[i]).y);
-                    group.push_back(puyoAt((*group[i]).x + 1, (*group[i]).y));
+                    group.push_back(mat.puyoAt((*group[i]).x + 1, (*group[i]).y));
                 }
                 ++i;
             }
@@ -97,33 +97,54 @@ PuyoPtrGroups Matrix::nextColorPops() {
     return groups;
 }
 
-PuyoPtrGroup Matrix::nextGarbagePops(PuyoPtrGroups nextColors) {
+PuyoPtrGroup nextGarbagePops(Matrix& mat, PuyoPtrGroups& nextColors) {
     PuyoPtrGroup garbageToPop;
 
-    for (PuyoPtrGroup group : nextColors) {
+    for (PuyoPtrGroup& group : nextColors) {
         for (Puyo* puyoPtr : group) {
             Puyo& puyo = *puyoPtr;
             
             // Check up
-            if (puyo.y > m_hrows && (*puyoAt(puyo.x, puyo.y - 1)).isGarbage()) {
-                garbageToPop.push_back(puyoAt(puyo.x, puyo.y - 1));
+            if (puyo.y > mat.m_hrows && (*mat.puyoAt(puyo.x, puyo.y - 1)).isGarbage()) {
+                garbageToPop.push_back(mat.puyoAt(puyo.x, puyo.y - 1));
             }
             // Check down
-            if (puyo.y < m_rows - 1 && (*puyoAt(puyo.x, puyo.y + 1)).isGarbage()) {
-                garbageToPop.push_back(puyoAt(puyo.x, puyo.y + 1));
+            if (puyo.y < mat.m_rows - 1 && (*mat.puyoAt(puyo.x, puyo.y + 1)).isGarbage()) {
+                garbageToPop.push_back(mat.puyoAt(puyo.x, puyo.y + 1));
             }
             // Check left
-            if (puyo.x > 0 && (*puyoAt(puyo.x - 1, puyo.y)).isGarbage()) {
-                garbageToPop.push_back(puyoAt(puyo.x - 1, puyo.y));
+            if (puyo.x > 0 && (*mat.puyoAt(puyo.x - 1, puyo.y)).isGarbage()) {
+                garbageToPop.push_back(mat.puyoAt(puyo.x - 1, puyo.y));
             }
             // Check right
-            if (puyo.x < m_cols - 1 && (*puyoAt(puyo.x + 1, puyo.y)).isGarbage()) {
-                garbageToPop.push_back(puyoAt(puyo.x + 1, puyo.y));
+            if (puyo.x < mat.m_cols - 1 && (*mat.puyoAt(puyo.x + 1, puyo.y)).isGarbage()) {
+                garbageToPop.push_back(mat.puyoAt(puyo.x + 1, puyo.y));
             }
         }
     }
 
     return garbageToPop;
+}
+
+void popColoredPuyos(PuyoPtrGroups& nextColors) {
+    for (PuyoPtrGroup& group : nextColors) {
+        for (Puyo* puyoPtr: group) {
+            Puyo& puyo = *puyoPtr;
+            puyo.p = COLOR["NONE"];
+        }
+    }
+}
+
+void popGarbagePuyos(PuyoPtrGroup& nextGarbage) {
+    for (Puyo* puyoPtr : nextGarbage) {
+        Puyo& garbage = *puyoPtr;
+
+        if (garbage.p == COLOR["HARD"]) {
+            garbage.p = COLOR["GARBAGE"];
+        } else if (garbage.p = COLOR["GARBAGE"]) {
+            garbage.p = COLOR["NONE"];
+        }
+    }
 }
 
 void Matrix::print() {
