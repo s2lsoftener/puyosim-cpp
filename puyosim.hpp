@@ -4,33 +4,9 @@
 #include <vector>
 #include <map>
 #include <string>
+#include "puyo.hpp"
 
 namespace PuyoSim {
-
-inline std::map<std::string, char> COLOR = {
-    {"NONE", '0'},
-    {"RED", 'R'},
-    {"GREEN", 'G'},
-    {"BLUE", 'B'},
-    {"YELLOW", 'Y'},
-    {"PURPLE", 'P'},
-    {"GARBAGE", 'J'},
-    {"HARD", 'H'},
-    {"BLOCK", 'B'}
-};
-
-class Puyo {
-public:
-    char p;
-    int x;
-    int y;
-
-    bool isEqual(Puyo& puyo);
-    bool isGarbage();
-};
-
-using PuyoGroup = std::vector<Puyo>;
-using PuyoGroups = std::vector<std::vector<Puyo>>;
 
 constexpr int DEFAULT_COLS{ 6 };
 constexpr int DEFAULT_ROWS{ 13 };
@@ -42,8 +18,8 @@ public:
     int m_rows;
     int m_cols;
     int m_hrows;
-    PuyoGroups m_nextColorPops;
-    PuyoGroup m_nextGarbagePops;
+    PuyoPtrGroups m_nextColorPops;
+    PuyoPtrGroup m_nextGarbagePops;
 
     Matrix(
         int rows = DEFAULT_ROWS,
@@ -53,10 +29,10 @@ public:
 
     Puyo* puyoAt(int x, int y);
     void setPuyo(char color, int x, int y);
-    void setTestChain();
+    void setTestChain(int i);
 
-    PuyoGroups nextColorPops();
-    PuyoGroup nextGarbagePops(PuyoGroups nextColors);
+    PuyoPtrGroups nextColorPops();
+    PuyoPtrGroup nextGarbagePops(PuyoPtrGroups nextColors);
 
     void print();
 };

@@ -3,15 +3,15 @@
 
 int main() {
     PuyoSim::Matrix mat;
-	mat.setTestChain();
+	mat.setTestChain(0);
 	mat.print();
 
-	PuyoSim::PuyoGroups nextColors = mat.nextColorPops();
-	PuyoSim::PuyoGroup nextGarbages = mat.nextGarbagePops(nextColors);
+    // Calculate the next color and garbage pops
+	PuyoSim::PuyoPtrGroups nextPops = mat.nextColorPops();
+	PuyoSim::PuyoPtrGroup nextGarbage = mat.nextGarbagePops(nextPops);
 
-    std::cout << "ok\n";
-	for (auto garbage : nextGarbages) {
-		std::cout << garbage.p;
+	for (auto garbage : nextGarbage) {
+		std::cout << (*garbage).p;
 	}
 
 	return 0;
