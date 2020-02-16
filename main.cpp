@@ -4,13 +4,9 @@
 
 void testClearing(int i) {
 	std::cout << "Test Popping Link" << '\n';
-	PuyoSim::Matrix* matPtr = new PuyoSim::Matrix();
-	std::cout << "Made matrix" << '\n';
-	PuyoSim::Matrix& mat = *matPtr;
+	PuyoSim::Matrix mat;
 	mat.setTestChain(i);
-	std::cout << "Set test chain" << '\n';
 	mat.print();
-	std::cout << "Print chain" << '\n';
 
 	// Calculate the next color pops
 	PuyoSim::PuyoPtrGroups nextPops;
@@ -29,27 +25,22 @@ void testClearing(int i) {
 	mat.print();
 
 	std::cout << "Reached.\n";
-
-	delete matPtr;
 }
 
 void testDropping() {
 	std::cout << "Test gravity, with block Puyos" << '\n';
-	PuyoSim::Matrix* matPtr = new PuyoSim::Matrix();
-	PuyoSim::Matrix& mat = *matPtr;
+	PuyoSim::Matrix mat;
 	mat.setTestChain(2);
 	mat.print();
 
 	PuyoSim::dropPuyos(mat);
 	mat.print();
 
-	delete matPtr;
 }
 
 void testScoring1() {
 	std::cout << "Test calculating a link's score" << '\n';
-	PuyoSim::Matrix* matPtr = new PuyoSim::Matrix();
-	PuyoSim::Matrix& mat = *matPtr;
+	PuyoSim::Matrix mat;
 	mat.setTestChain(3);
 	mat.print();
 
@@ -67,14 +58,11 @@ void testScoring1() {
 
 	std::cout << "Link Score if 2 Chain: " << score << '\n';
 	std::cout << "Chain Garbage: " << garbageTotal << '\n';
-
-	delete matPtr;
 }
 
 void testFullSimulate() {
 	std::cout << "Test simulating full chain" << '\n';
-	PuyoSim::Matrix* matPtr = new PuyoSim::Matrix();
-	PuyoSim::Matrix& mat = *matPtr;
+	PuyoSim::Matrix mat;
 	mat.setTestChain(0);
 	mat.print();
 	std::cout << '\n';
@@ -88,8 +76,6 @@ void testFullSimulate() {
 	std::cout << "Chain Length: " << chainLength << '\n';
 	std::cout << "Chain Score: " << score << '\n';
 	std::cout << "Chain Garbage: " << garbage << '\n';
-
-	delete matPtr;
 }
 
 
