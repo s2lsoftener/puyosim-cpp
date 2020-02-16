@@ -16,7 +16,7 @@ inline std::map<std::string, char> COLOR = {
     {"PURPLE", 'P'},
     {"GARBAGE", 'J'},
     {"HARD", 'H'},
-    {"BLOCK", 'B'}
+    {"BLOCK", 'L'}
 };
 
 class Puyo {
@@ -27,6 +27,8 @@ public:
 
     bool isEqual(Puyo& puyo);
     bool isGarbage();
+    bool isNone();
+    bool isBlock();
 };
 
 using PuyoPtrGroup = std::vector<Puyo*>;
