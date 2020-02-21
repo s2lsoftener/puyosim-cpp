@@ -268,6 +268,28 @@ std::tuple<int, int, int> simulateChain(Matrix& mat) {
     return std::make_tuple(chainLength, score, garbageTotal);
 }
 
+using ColorInfo = std::tuple<int, std::vector<char>>;
+ColorInfo Matrix::usedColors() {
+    std::vector<char> colors;
+
+    for (Puyo puyo : m_data) {
+        if (colors.size() == 5) {
+            // Found all 5 colors
+            break;
+        }
+        
+        if (puyo.isColored()) {
+            colors.push_back(puyo.p);
+        }
+    }
+    
+    return std::make_tuple(colors.size(), colors);;
+}
+
+std::vector<Matrix> permutePlacements(ColorInfo colorInfo) {
+    // ...
+}
+
 void Matrix::print() {
     std::cout << m_rows << " " << m_cols << '\n';
 

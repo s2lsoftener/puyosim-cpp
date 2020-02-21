@@ -18,4 +18,8 @@ bool Puyo::isBlock() {
     return p == COLOR["BLOCK"];
 }
 
+bool Puyo::isColored() {
+    return p == COLOR["RED"] || p == COLOR["GREEN"] || p == COLOR["BLUE"] || p == COLOR["YELLOW"] || p == COLOR["PURPLE"];
+}
+
 }

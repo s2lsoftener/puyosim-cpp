@@ -50,6 +50,7 @@ public:
     void setPuyo(char color, int x, int y);
     void setTestChain(int i);
     size_t size();
+    std::tuple<int, std::vector<char>> usedColors();
 
     void print();
 };
@@ -109,6 +110,7 @@ int calcChainGarbage(Matrix& mat, int score);
 /**
  * Fully simulate the chain, mutating the original matrix.
  * @param mat Puyo Matrix
+ * @returns Chain Length, Score, Garbage Total
  */
 std::tuple<int, int, int> simulateChain(Matrix& mat);
 

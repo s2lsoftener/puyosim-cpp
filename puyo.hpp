@@ -28,6 +28,7 @@ public:
     bool isEqual(Puyo& puyo);
     bool isGarbage();
     bool isNone();
+    bool isColored();
     bool isBlock();
 };
 
